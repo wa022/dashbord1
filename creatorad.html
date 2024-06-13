@@ -34,6 +34,8 @@
             padding: 8px;
             border-radius: 4px;
             border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
         }
         button {
             background-color: #007bff;
@@ -48,14 +50,17 @@
             margin-top: 20px;
             height: 150px;
             resize: none;
+            width: 100%;
+            box-sizing: border-box;
         }
         .preview-container {
             background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            height: 300px;
+            width: 100%; /* تحديد العرض بنسبة مرونة */
+            max-width: 300px; /* حد أقصى للعرض */
+            height: auto; /* الارتفاع يتكيف تلقائيًا مع المحتوى */
             position: relative;
             overflow: hidden;
             border: 2px solid #000;
@@ -70,19 +75,20 @@
         }
         .preview-content {
             background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
+            padding: 10px;
             border-radius: 8px;
             animation: fadeIn 1s forwards, slideIn 1s forwards;
             animation-delay: 0s, 0s;
             opacity: 0;
         }
         .preview-content h1, .preview-content h2 {
-            margin: 10px 0;
+            margin: 5px 0;
+            font-size: 1rem; /* حجم الخط المرون */
             color: #fff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         .preview-content img {
-            max-width: 100%;
+            max-width: 100%; /* تكبير حجم الصورة */
             height: auto;
             margin: 10px 0;
             animation: popIn 1s forwards;
@@ -102,6 +108,39 @@
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
+        }
+        .ad-container {
+            width: 100%; /* تحديد العرض بنسبة للمرونة */
+            max-width: 300px; /* حد أقصى للعرض */
+            height: auto; /* الارتفاع يتكيف تلقائيًا مع المحتوى */
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .ad-content {
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        .ad-content h1 {
+            font-size: 1.5rem; /* تكبير حجم العنوان الرئيسي */
+            margin: 10px 0;
+        }
+        .ad-content h2 {
+            font-size: 1rem; /* تكبير حجم العنوان الفرعي */
+            margin: 5px 0;
+        }
+        .ad-content img {
+            max-width: 100%; /* تكبير حجم صورة المنتج */
+            height: auto;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -165,15 +204,16 @@
     <a href="${productLink}" target="_blank" style="text-decoration: none; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
         <div class="ad-content">
             <h1>${mainTitle}</h1>
-            <img src="${productImage}" alt="صورة المنتج">
+            <img src="${productImage}" alt="${mainTitle}">
             <h2>${subTitle}</h2>
         </div>
     </a>
 </div>
 <style>
     .ad-container {
-        width: 300px;
-        height: 300px;
+        width: 100%; /* تحديد العرض بنسبة للمرونة */
+        max-width: 300px; /* حد أقصى للعرض */
+        height: auto; /* الارتفاع يتكيف تلقائيًا مع المحتوى */
         position: relative;
         overflow: hidden;
         border: 2px solid #000;
@@ -183,28 +223,28 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        text-align: center;
-        animation: blink 2s infinite;
+        margin-top: 20px;
+        animation: fadeIn 1s forwards, slideIn 1s forwards;
     }
     .ad-content {
-        background: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        color: white;
         padding: 20px;
-        border-radius: 8px;
         animation: fadeIn 1s forwards, slideIn 1s forwards;
-        animation-delay: 0s, 0s;
-        opacity: 0;
     }
-    .ad-content h1, .ad-content h2 {
+    .ad-content h1 {
+        font-size: 1.5rem; /* تكبير حجم العنوان الرئيسي */
         margin: 10px 0;
-        color: #fff;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .ad-content h2 {
+        font-size: 1rem; /* تكبير حجم العنوان الفرعي */
+        margin: 5px 0;
     }
     .ad-content img {
-        max-width: 100%;
+        max-width: 100%; /* تكبير حجم صورة المنتج */
         height: auto;
-        margin: 10px 0;
+        margin-top: 10px;
         animation: popIn 1s forwards;
-        animation-delay: 1s;
     }
     @keyframes fadeIn {
         to { opacity: 1; }
@@ -217,12 +257,7 @@
         from { transform: scale(0); }
         to { transform: scale(1); }
     }
-    @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
-    }
-</style>
-`;
+</style>`;
 
             document.getElementById('generated-code').value = adCode;
         });
